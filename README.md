@@ -32,7 +32,7 @@ echo "GEMINI_API_KEY=your_gemini_api_key_here" > .env
 firebase emulators:start --only functions
 ```
 
-API will be available at: http://localhost:5001/YOUR_PROJECT/us-central1/api/chat
+API will be available at: http://localhost:5001/financial-assistant-jart/us-central1/api/chat
 
 ## To deploy on Firebase:
 ```bash
