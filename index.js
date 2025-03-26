@@ -7,7 +7,7 @@ const app = express();
 app.use(cors({ origin: true }));
 app.use(express.json());
 
-const GEMINI_API_KEY = "AIzaSyDj_2dsYeiwagKazOxguMcNBo-vNKEXZzU"; //replace with your api key here
+const GEMINI_API_KEY = ""; //replace with your api key here
 const GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
 const FINANCIAL_ASSISTANT_PROMPT = `
