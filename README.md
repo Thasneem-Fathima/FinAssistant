@@ -22,11 +22,6 @@ cd functions
 npm install
 ```
 
-## Set up environment variables (Create a .env file)
-```bash
-echo "GEMINI_API_KEY=your_gemini_api_key_here" > .env
-```
-
 ## Run Firebase functions locally
 ```bash
 firebase emulators:start --only functions
