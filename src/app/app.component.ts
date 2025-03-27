@@ -1,7 +1,8 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { ChatComponent } from './chat/chat.component';
 import { Meta } from '@angular/platform-browser';
-import { NgClass } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
+
 import {
   ConversationService,
   Conversation,
@@ -11,18 +12,19 @@ import { ChatService } from './services/chat.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ChatComponent, NgClass],
+  imports: [ChatComponent, NgClass, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'chatgpt-clone-app';
-  isSidebarOpen = false;
+  title = 'FinAssistant';
+  isSidebarVisible = true; // Sidebar visible by default on desktop, like ChatGPT
   conversations: Conversation[] = [];
   selectedConversationId: string | null = null;
   isLoading = false;
   private conversationListener: ((e: Event) => void) | null = null;
 
+  // Dependency injection using inject()
   meta = inject(Meta);
   conversationService = inject(ConversationService);
   chatService = inject(ChatService);
@@ -34,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadConversations();
 
-    // Store listener reference for cleanup
+    // Set up event listener for new conversation creation
     this.conversationListener = ((event: CustomEvent) => {
       if (event.detail?.id) {
         this.selectedConversationId = event.detail.id;
@@ -46,17 +48,15 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Clean up event listener
+    // Clean up event listener to prevent memory leaks
     if (this.conversationListener) {
-      window.removeEventListener(
-        'conversation-created',
-        this.conversationListener
-      );
+      window.removeEventListener('conversation-created', this.conversationListener);
     }
   }
 
+  /** Sets up meta tags for SEO and page configuration */
   setupMetaTags(): void {
-    this.meta.addTag({ name: 'description', content: 'ChatGPT Clone App' });
+    this.meta.addTag({ name: 'description', content: 'FinAssistant' });
     this.meta.addTag({
       name: 'viewport',
       content: 'width=device-width, initial-scale=1',
@@ -66,41 +66,25 @@ export class AppComponent implements OnInit, OnDestroy {
       type: 'image/x-icon',
       href: 'favicon.ico',
     });
-    this.meta.addTag({
-      rel: 'canonical',
-      href: 'https://chatgpt-clone-app-manthanank.vercel.app/',
-    });
-    this.meta.addTag({ property: 'og:title', content: 'Chatgpt Clone App' });
-    this.meta.addTag({ name: 'author', content: 'Manthan Ankolekar' });
+    this.meta.addTag({ property: 'og:title', content: 'FinAssistant' });
     this.meta.addTag({
       name: 'keywords',
-      content: 'angular, nodejs. express, mongodb',
+      content: 'angular, nodejs, express, mongodb',
     });
     this.meta.addTag({ name: 'robots', content: 'index, follow' });
     this.meta.addTag({
       property: 'og:description',
       content:
-        'A simple chatgpt clone app where you can chat with the bot and get the response.',
-    });
-    this.meta.addTag({
-      property: 'og:image',
-      content: 'https://chatgpt-clone-app-manthanank.vercel.app/image.jpg',
-    });
-    this.meta.addTag({
-      property: 'og:url',
-      content: 'https://chatgpt-clone-app-manthanank.vercel.app/',
+        'A simple FinAssistant where you can chat with the bot and get the response.',
     });
   }
 
-  toggleSidebar() {
-    this.isSidebarOpen = !this.isSidebarOpen;
-    if (this.isSidebarOpen) {
-      document.body.classList.add('sidebar-open');
-    } else {
-      document.body.classList.remove('sidebar-open');
-    }
+  /** Toggles sidebar visibility (used by collapse/expand buttons) */
+  toggleSidebar(): void {
+    this.isSidebarVisible = !this.isSidebarVisible;
   }
 
+  /** Loads all conversations from the service */
   loadConversations(): void {
     this.isLoading = true;
     this.conversationService.getConversations().subscribe({
@@ -115,12 +99,13 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
+  /** Creates a new chat conversation */
   newChat(): void {
-    // Clear selected conversation first
+    // Clear current conversation
     this.selectedConversationId = null;
     this.chatService.currentConversationId = null;
 
-    // Clear existing messages
+    // Dispatch event to clear messages in the chat component
     window.dispatchEvent(
       new CustomEvent('conversation-selected', {
         detail: { messages: [] },
@@ -133,6 +118,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.selectedConversationId = conversation.id;
         this.chatService.currentConversationId = conversation.id;
 
+        // Close sidebar on mobile after creating a new chat
         if (window.innerWidth < 768) {
           this.toggleSidebar();
         }
@@ -143,6 +129,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
+  /** Selects an existing conversation by ID */
   selectConversation(id: string): void {
     this.selectedConversationId = id;
     this.chatService.currentConversationId = id;
@@ -152,6 +139,7 @@ export class AppComponent implements OnInit, OnDestroy {
         window.dispatchEvent(
           new CustomEvent('conversation-selected', { detail: conversation })
         );
+        // Close sidebar on mobile after selecting a conversation
         if (window.innerWidth < 768) {
           this.toggleSidebar();
         }
@@ -162,6 +150,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
+  /** Deletes a conversation by ID */
   deleteConversation(id: string, event: Event): void {
     event.stopPropagation();
     this.conversationService.deleteConversation(id).subscribe({
@@ -175,5 +164,10 @@ export class AppComponent implements OnInit, OnDestroy {
         console.error('Error deleting conversation:', error);
       },
     });
+  }
+
+  openPortfolio(): void {
+    console.log('Portfolio button clicked');
+    // Add portfolio logic here
   }
 }

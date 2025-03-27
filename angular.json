@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "chatgpt-clone-app": {
+    "FinAssistant": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -70,10 +70,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "chatgpt-clone-app:build:production"
+              "buildTarget": "FinAssistant:build:production"
             },
             "development": {
-              "buildTarget": "chatgpt-clone-app:build:development"
+              "buildTarget": "FinAssistant:build:development"
             }
           },
           "defaultConfiguration": "development"

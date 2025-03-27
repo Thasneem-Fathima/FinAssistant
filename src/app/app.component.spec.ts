@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'chatgpt-clone-app' title`, () => {
+  it(`should have the 'FinAssistant' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('chatgpt-clone-app');
+    expect(app.title).toEqual('FinAssistant');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, chatgpt-clone-app');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, FinAssistant');
   });
 });

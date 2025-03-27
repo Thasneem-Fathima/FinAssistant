@@ -14,11 +14,12 @@ import { ChatService } from '../services/chat.service';
 import { ConversationService } from '../services/conversation.service';
 import { inject } from '@angular/core';
 import { finalize } from 'rxjs/operators';
+import { ChatBoxComponent } from './chat-box/chat-box.component';
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule, NgClass],
+  imports: [FormsModule, NgClass, ChatBoxComponent],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss',
 })
@@ -178,6 +179,27 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnChanges {
           },
         });
     }
+  }
+
+  onModeChanged(mode: string) {
+    console.log('Mode changed to:', mode);
+  }
+
+  onMessageSent(message: string) {
+    console.log('Message sent:', message);
+  }
+
+  onFileSelected(file: File) {
+    console.log('File selected:', file);
+  }
+
+  onImageSelected(image: File) {
+    console.log('Image selected:', image);
+  }
+
+  onRecordAudioClicked() {
+    console.log('Audio recording clicked');
+    // Implement audio recording logic here
   }
 
   useExample(text: string) {
