@@ -1,0 +1,30 @@
+h1 {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+}
+
+.chat-container {
+    position: relative;
+    height: 80vh;
+}
+
+.chat-fixed {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+// Add smooth transition for sidebar
+.sidebar-transition {
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .md\:fixed {
+        position: fixed;
+    }
+}

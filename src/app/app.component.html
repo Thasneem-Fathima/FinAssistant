@@ -1,5 +1,79 @@
-<div class="container">
-  <h1>API Debugging</h1>
-  <p><strong>Response from API:</strong></p>
-  <pre>{{ responseData | json }}</pre>
+<div class="flex h-screen bg-gray-100 overflow-hidden">
+  <!-- Sidebar - Desktop (md:block) & Mobile (when open) -->
+  <div [ngClass]="{'block': isSidebarOpen, 'hidden': !isSidebarOpen, 'md:block': true, 'sidebar-transition': true}"
+    class="w-64 bg-gray-900 text-white p-4 fixed h-full md:relative z-20">
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-xl font-bold flex items-center">
+        ChatGPT Clone
+      </h1>
+      <!-- Close button for mobile -->
+      <button (click)="toggleSidebar()" class="md:hidden p-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <button (click)="newChat()"
+      class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded mb-4 flex items-center justify-center">
+      <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 5V19" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+      New Chat
+    </button>
+
+    <div class="overflow-y-auto max-h-[calc(100vh-200px)]">
+      <div class="text-sm text-gray-300 mb-2">Recent conversations</div>
+
+      <!-- Loading indicator -->
+      @if (isLoading) {
+      <div class="text-sm text-gray-400 text-center py-4">Loading...</div>
+      }
+
+      <!-- No conversations message -->
+      @if (!isLoading && conversations.length === 0) {
+      <div class="text-sm text-gray-400 text-center py-4">No recent conversations</div>
+      }
+
+      <!-- List of conversations -->
+      @for (conversation of conversations; track conversation.id) {
+      <div (click)="selectConversation(conversation.id)"
+        class="flex justify-between items-center rounded p-2 cursor-pointer mb-1 text-sm hover:bg-gray-800"
+        [ngClass]="{'bg-gray-800': selectedConversationId === conversation.id}">
+        <div class="truncate flex-1">{{ conversation.title }}</div>
+        <button (click)="deleteConversation(conversation.id, $event)"
+          class="text-gray-400 hover:text-white p-1 rounded">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      }
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 flex flex-col overflow-hidden w-full">
+    <!-- Mobile Header -->
+    <div class="bg-white border-b p-4 md:hidden flex items-center">
+      <button (click)="toggleSidebar()" class="mr-4">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+      <h1 class="text-xl font-bold">ChatGPT Clone</h1>
+    </div>
+
+    <!-- Overlay for mobile when sidebar is open -->
+    @if (isSidebarOpen) {
+    <div (click)="toggleSidebar()" class="md:hidden fixed inset-0 bg-black bg-opacity-50 z-10">
+    </div>
+    }
+
+    <!-- Chat Area -->
+    <div class="flex-1 overflow-hidden relative">
+      <app-chat [conversationId]="selectedConversationId"></app-chat>
+    </div>
+  </div>
 </div>
