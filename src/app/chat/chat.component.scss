@@ -119,6 +119,54 @@ textarea {
   width: 100%; /* Ensure textarea takes full width */
 }
 
+h1 {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+}
+
+.chat-container {
+  position: relative;
+  height: 80vh;
+  display: flex;
+  flex-direction: column; // Ensures stacking of elements
+}
+
+// Ensure chat box stays at bottom correctly
+.chat-fixed {
+  position: sticky; // Change from absolute to sticky
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 10; // Keeps it above other elements
+  padding: 8px;
+  border-top: 1px solid #ddd;
+}
+
+// Sidebar transition with smooth effect
+.sidebar-transition {
+  transition: width 0.3s ease-in-out;
+}
+
+// Responsive handling for mobile
+@media (max-width: 768px) {
+  .md\:fixed {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: white;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:block {
+      display: none;
+  }
+}
+
 // Fix for mobile view
 @media (max-width: 768px) {
   .border-t {

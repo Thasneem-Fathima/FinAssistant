@@ -1,18 +1,17 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
-import { ChatComponent } from './chat/chat.component';
 import { Meta } from '@angular/platform-browser';
-import { NgClass, NgIf } from '@angular/common';
 
 import {
   ConversationService,
   Conversation,
 } from './services/conversation.service';
 import { ChatService } from './services/chat.service';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ChatComponent, NgClass, NgIf],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
