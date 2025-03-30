@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lander',
@@ -9,9 +10,13 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./lander.component.scss'],
 })
 export class LanderComponent {
-  message = 'Welcome to FinMate!'; // Example property from AngularJS controller
+  message = 'Welcome to FinMate!';
+  constructor(private router: Router) {}
 
-  // Placeholder methods for interactivity (can be expanded)
+  goTo(place: string) {
+    this.router.navigate([place])
+  }
+
   scrollToSection(sectionId: string): void {
     const element = document.getElementById(sectionId);
     if (element) {

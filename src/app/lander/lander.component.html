@@ -5,37 +5,37 @@
         <ul class="flex space-x-6">
             <li>
                 <a (click)="scrollToSection('overview')"
-                    class="hover:underline text-gray-600 cursor-pointer">Overview</a>
+                    class="hover:underline text-gray-800 cursor-pointer">Overview</a>
             </li>
             <li>
                 <a (click)="scrollToSection('features')"
-                    class="hover:underline text-gray-600 cursor-pointer">Features</a>
+                    class="hover:underline text-gray-800 cursor-pointer">Features</a>
             </li>
             <li>
-                <a (click)="scrollToSection('demo')" class="hover:underline text-gray-600 cursor-pointer">Demo</a>
+                <a (click)="scrollToSection('demo')" class="hover:underline text-gray-800 cursor-pointer">Demo</a>
             </li>
             <li>
-                <a (click)="scrollToSection('pricing')" class="hover:underline text-gray-600 cursor-pointer">Pricing</a>
+                <a (click)="scrollToSection('pricing')" class="hover:underline text-gray-800 cursor-pointer">Pricing</a>
             </li>
             <li>
                 <a (click)="scrollToSection('testimonials')"
-                    class="hover:underline text-gray-600 cursor-pointer">Testimonials</a>
+                    class="hover:underline text-gray-800 cursor-pointer">Testimonials</a>
             </li>
             <li>
-                <a (click)="scrollToSection('contact')" class="hover:underline text-gray-600 cursor-pointer">Contact</a>
+                <a (click)="scrollToSection('contact')" class="hover:underline text-gray-800 cursor-pointer">Contact</a>
             </li>
         </ul>
     </nav>
 </header>
 
 <!-- Hero / Overview Section -->
-<section id="overview" class="bg-gradient-to-r from-green-600 to-teal-600 text-white text-center py-20">
+<section id="overview" class="bg-gradient-to-r from-green-600 to-green-700 text-white text-center py-20">
     <div class="max-w-4xl mx-auto">
         <h2 class="text-5xl font-extrabold mb-6">Your Smart Finance Assistant</h2>
         <p class="text-xl mb-8">
             Manage your expenses, track your investments, and plan your future with AI-powered insights.
         </p>
-        <a (click)="scrollToSection('get-started')"
+        <a (click)="goTo('/login')"
             class="bg-white text-green-600 py-3 px-8 rounded-full font-bold shadow hover:bg-gray-100 transition cursor-pointer">
             Get Started
         </a>
@@ -46,7 +46,7 @@
 <div class="divider h-20 w-full"></div>
 
 <!-- Features & Benefits Section -->
-<section id="features" class="py-20 bg-gray-50">
+<section id="features" class="py-20 bg-gray-100">
     <div class="max-w-6xl mx-auto px-6 text-center">
         <h3 class="text-3xl font-bold mb-12">Why Choose FinMate?</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -87,7 +87,7 @@
 </section>
 
 <!-- Pricing Section -->
-<section id="pricing" class="py-20 bg-gray-50">
+<section id="pricing" class="py-20 bg-gray-100">
     <div class="max-w-5xl mx-auto px-6 text-center">
         <h3 class="text-3xl font-bold mb-8">Pricing Plans</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -156,7 +156,7 @@
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="py-20 bg-gray-50">
+<section id="contact" class="py-20 bg-gray-100">
     <div class="max-w-4xl mx-auto px-6 text-center">
         <h3 class="text-3xl font-bold mb-8">Get in Touch</h3>
         <p class="text-gray-700 mb-6">
