@@ -29,11 +29,6 @@ firebase emulators:start --only functions
 
 API will be available at: http://localhost:5001/financial-assistant-jart/us-central1/api/chat
 
-## To deploy on Firebase:
-```bash
-firebase deploy --only functions
-```
-
 ## Switch to frontend branch
 ```bash
 git checkout frontend
