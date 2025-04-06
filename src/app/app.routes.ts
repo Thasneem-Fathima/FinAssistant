@@ -9,5 +9,5 @@ export const routes: Routes = [
     { path: 'signup', component: SignupComponent },
     { path: 'finmate', component: LanderComponent },
     { path: 'chat', component: ChatComponent },
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '', redirectTo: '/finmate', pathMatch: 'full' },
 ];

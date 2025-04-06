@@ -22,7 +22,7 @@ export class LoginComponent {
     console.log('Login submitted:', { email: this.email, password: this.password, rememberMe: this.rememberMe });
     // Add actual authentication logic here (e.g., call a service)
     // On success, navigate to a dashboard or home page
-    this.router.navigate(['/dashboard']); // Example navigation
+    this.router.navigate(['/chat']); // Example navigation
   }
 
   loginWithGoogle(): void {

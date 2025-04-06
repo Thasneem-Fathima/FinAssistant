@@ -1,43 +1,76 @@
-<div class="min-h-screen flex items-center justify-center bg-background-light">
-    <!-- Login Form Container -->
-    <div class="card max-w-md w-full">
-      <h2 class="text-2xl font-bold text-center mb-6">Login to FinMate</h2>
-      <form (ngSubmit)="onSubmit()">
-        <div class="input-group">
-          <label class="input-label" for="email">Email</label>
-          <input type="email" id="email" [(ngModel)]="email" name="email" 
-            placeholder="Enter your email" class="input-field" required />
-        </div>
-        <div class="input-group">
-          <label class="input-label" for="password">Password</label>
-          <input type="password" id="password" [(ngModel)]="password" name="password"
-            placeholder="Enter your password" class="input-field" required />
-        </div>
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <input type="checkbox" id="remember" [(ngModel)]="rememberMe" name="remember" class="mr-1" />
-            <label for="remember" class="text-gray-700 text-sm">Remember me</label>
-          </div>
-          <a (click)="forgotPassword()" class="text-primary text-sm hover:underline cursor-pointer">
-            Forgot Password?
-          </a>
-        </div>
-        <button type="submit" class="btn btn-secondary w-full">
-          Login
-        </button>
-      </form>
-      <div class="flex items-center my-4">
-        <hr class="flex-grow border-t" />
-        <span class="mx-2 text-gray-500">or</span>
-        <hr class="flex-grow border-t" />
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <!-- Login Form Container -->
+  <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+    <h2 class="text-2xl font-bold text-center mb-6">Login to FinMate</h2>
+    <form (ngSubmit)="onSubmit()">
+      <!-- Email Input -->
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 mb-2">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="Enter your email"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
       </div>
-      <button (click)="loginWithGoogle()" class="btn btn-outline w-full">
-        <img src="https://cdn3.emoji.gg/emojis/Google_Logo.png" alt="Google Logo" class="w-6 h-6 mr-2" />
-        <span>Login with Google</span>
+
+      <!-- Password Input -->
+      <div class="mb-4">
+        <label for="password" class="block text-gray-700 mb-2">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="Enter your password"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+      </div>
+
+      <!-- Remember me and Forgot Password -->
+      <div class="flex items-center justify-between mb-4">
+        <label class="flex items-center text-gray-700 text-sm">
+          <input type="checkbox" id="remember" name="remember" [(ngModel)]="rememberMe" class="mr-2" />
+          Remember me
+        </label>
+        <a (click)="forgotPassword()" class="text-blue-600 text-sm hover:underline cursor-pointer">
+          Forgot Password?
+        </a>
+      </div>
+
+      <!-- Login Button -->
+      <button
+        type="submit"
+        class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+      >
+        Login
       </button>
-      <p class="mt-4 text-center text-gray-600 text-sm">
-        Don't have an account?
-        <a (click)="navigateToSignup()" class="text-secondary hover:underline cursor-pointer">Sign Up</a>
-      </p>
+    </form>
+
+    <!-- OR Divider -->
+    <div class="flex items-center my-4">
+      <hr class="flex-grow border-t" />
+      <span class="mx-2 text-gray-500">or</span>
+      <hr class="flex-grow border-t" />
     </div>
+
+    <!-- Google Login -->
+    <button
+      (click)="loginWithGoogle()"
+      class="w-full flex items-center justify-center border border-gray-300 py-2 rounded-lg hover:bg-gray-100 transition"
+    >
+      <img src="https://cdn3.emoji.gg/emojis/Google_Logo.png" alt="Google Logo" class="w-6 h-6 mr-2" />
+      <span>Login with Google</span>
+    </button>
+
+    <!-- Signup Redirect -->
+    <p class="mt-4 text-center text-gray-600 text-sm">
+      Don't have an account?
+      <a (click)="navigateToSignup()" class="text-blue-600 hover:underline cursor-pointer">Sign Up</a>
+    </p>
   </div>
+</div>

@@ -1,41 +1,20 @@
-import { Injectable, inject } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+// chat.service.ts
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ChatService {
-  private apiUrl = environment.apiUrl + '/chat';
-  private conversationsUrl = environment.apiUrl + '/conversations';
-  http = inject(HttpClient);
-  
-  currentConversationId: string | null = null;
+  private apiUrl = 'http://localhost:5001/financial-assistant-jart/us-central1/api/chat';
 
-  post(prompt: string): Observable<any> {
-    return this.http
-      .post<{bot: string; conversationId?: string}>(this.apiUrl, { 
-        prompt,
-        conversationId: this.currentConversationId
-      })
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
+  public currentConversationId: string | null = null;
 
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An error occurred';
-    if (error.error instanceof ErrorEvent) {
-      // Client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Server-side error
-      errorMessage = error.status ? 
-        `Error ${error.status}: ${error.error.message || 'Unknown error'}` :
-        'Server error';
-    }
-    console.error('API Error:', errorMessage);
-    return throwError(() => new Error(errorMessage));
+  constructor(private http: HttpClient) {}
+
+  post(message: string): Observable<any> {
+    const body = { message };
+    return this.http.post<{ reply: string }>(this.apiUrl, body);
   }
 }

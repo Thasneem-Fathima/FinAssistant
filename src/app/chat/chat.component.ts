@@ -69,7 +69,7 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnChanges {
     }) as EventListener;
 
     window.addEventListener('conversation-created', this.conversationListener);
-  
+
     if (this.conversationId) {
       this.loadConversation(this.conversationId);
     } else {
@@ -267,65 +267,71 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnChanges {
     const keyboardEvent = event as KeyboardEvent;
     if (keyboardEvent.key === 'Enter' && !keyboardEvent.shiftKey) {
       event.preventDefault();
-      this.sendMessage();
+      // this.sendMessage();
     } else if (keyboardEvent.key === 'Enter' && keyboardEvent.shiftKey) {
       setTimeout(() => this.adjustTextareaHeight());
     }
   }
 
-  sendMessage() {
-    if (this.inputText.trim() && !this.isLoading) {
-      const userMessage = this.inputText.trim();
-      this.messages.push({ user: true, text: userMessage });
-      this.inputText = '';
-      this.isLoading = true;
-      this.shouldScroll = true;
+  sendMessage(message: string) {
+    const trimmedMessage = message.trim();
 
-      // Reset textarea height
-      if (this.messageInput?.nativeElement) {
-        this.messageInput.nativeElement.style.height = 'auto';
-      }
+    if (!trimmedMessage || this.isLoading) return;
 
-      this.chat
-        .post(userMessage)
-        .pipe(
-          finalize(() => {
-            this.isLoading = false;
-            this.shouldScroll = true;
-          })
-        )
-        .subscribe({
-          next: (response) => {
-            if (response.bot) {
-              this.messages.push({ user: false, text: response.bot.trim() });
-            }
+    // Push user message
+    this.messages.push({ user: true, text: trimmedMessage });
+    this.inputText = '';
+    this.isLoading = true;
+    this.shouldScroll = true;
 
-            if (response.conversationId && !this.conversationId) {
-              this.conversationId = response.conversationId;
-              this.chat.currentConversationId = response.conversationId;
-
-              window.dispatchEvent(
-                new CustomEvent('conversation-created', {
-                  detail: { id: response.conversationId },
-                })
-              );
-            }
-
-            setTimeout(() => this.scrollToBottom(), 100);
-          },
-          error: (error) => {
-            console.error('Error:', error);
-            this.messages.push({
-              user: false,
-              text:
-                error.message ||
-                'Sorry, I encountered an error. Please try again.',
-            });
-            setTimeout(() => this.scrollToBottom(), 100);
-          },
-        });
+    // Reset textarea height
+    if (this.messageInput?.nativeElement) {
+      this.messageInput.nativeElement.style.height = 'auto';
     }
+
+    console.log("Sending message to chat service:", trimmedMessage);
+
+    this.chat
+      .post(trimmedMessage)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+          this.shouldScroll = true;
+        })
+      )
+      .subscribe({
+        next: (response: any) => {
+          console.log("Response from backend:", response);
+
+          const replyText = response.reply?.trim() || 'Sorry, I didn’t understand that.';
+
+          // Push bot reply
+          this.messages.push({ user: false, text: replyText });
+
+          if (response.conversationId && !this.conversationId) {
+            this.conversationId = response.conversationId;
+            this.chat.currentConversationId = response.conversationId;
+
+            window.dispatchEvent(
+              new CustomEvent('conversation-created', {
+                detail: { id: response.conversationId },
+              })
+            );
+          }
+
+          setTimeout(() => this.scrollToBottom(), 100);
+        },
+        error: (error:any) => {
+          console.error('Error from chat service:', error);
+          this.messages.push({
+            user: false,
+            text: 'Sorry, something went wrong. Please try again later.',
+          });
+          setTimeout(() => this.scrollToBottom(), 100);
+        },
+      });
   }
+
 
   onModeChanged(mode: string) {
     console.log('Mode changed to:', mode);
@@ -333,6 +339,7 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnChanges {
 
   onMessageSent(message: string) {
     console.log('Message sent:', message);
+    this.sendMessage(message)
   }
 
   onFileSelected(file: File) {
@@ -350,6 +357,6 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnChanges {
 
   useExample(text: string) {
     this.inputText = text;
-    this.sendMessage();
+    // this.sendMessage();
   }
 }

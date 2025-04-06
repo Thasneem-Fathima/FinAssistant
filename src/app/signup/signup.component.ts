@@ -20,7 +20,7 @@ export class SignupComponent {
     // Placeholder signup logic
     console.log('Sign Up submitted:', { email: this.email, password: this.password });
     // Add actual signup logic here (e.g., call a service)
-    this.router.navigate(['/dashboard']); // Example navigation
+    this.router.navigate(['/chat']); // Example navigation
   }
 
   signupWithGoogle(): void {
