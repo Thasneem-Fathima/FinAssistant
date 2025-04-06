@@ -4,8 +4,13 @@ const cors = require("cors");
 const axios = require("axios");
 
 const app = express();
-app.use(cors({ origin: true }));
+app.use(cors({
+    origin: '*', // For development. You can restrict to 127.0.0.1:5500 if needed
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type']
+}));
 app.use(express.json());
+app.use(express.static("public")); 
 require("dotenv").config(); 
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
@@ -49,4 +54,8 @@ app.post("/chat", async (req, res) => {
 });
 
 // Deploy as Firebase Function
-exports.api = functions.https.onRequest(app);
+// exports.api = functions.https.onRequest(app);
+const PORT = 5001;
+app.listen(PORT, () => {
+console.log(`Server running locally on http://localhost:${PORT}`);
+});
