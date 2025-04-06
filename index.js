@@ -6,8 +6,9 @@ const axios = require("axios");
 const app = express();
 app.use(cors({ origin: true }));
 app.use(express.json());
+require("dotenv").config(); 
 
-const GEMINI_API_KEY = "AIzaSyDj_2dsYeiwagKazOxguMcNBo-vNKEXZzU"; //replace with your api key here
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
 const FINANCIAL_ASSISTANT_PROMPT = `
