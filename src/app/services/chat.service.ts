@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ChatService {
-  private apiUrl = 'http://localhost:5001/financial-assistant-jart/us-central1/api/chat';
+  private apiUrl = 'https://finassistant.onrender.com/chat';
 
   public currentConversationId: string | null = null;
 
