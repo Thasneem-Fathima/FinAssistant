@@ -1,0 +1,43 @@
+<div class="min-h-screen flex items-center justify-center bg-background-light">
+    <!-- Login Form Container -->
+    <div class="card max-w-md w-full">
+      <h2 class="text-2xl font-bold text-center mb-6">Login to FinMate</h2>
+      <form (ngSubmit)="onSubmit()">
+        <div class="input-group">
+          <label class="input-label" for="email">Email</label>
+          <input type="email" id="email" [(ngModel)]="email" name="email" 
+            placeholder="Enter your email" class="input-field" required />
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="password">Password</label>
+          <input type="password" id="password" [(ngModel)]="password" name="password"
+            placeholder="Enter your password" class="input-field" required />
+        </div>
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <input type="checkbox" id="remember" [(ngModel)]="rememberMe" name="remember" class="mr-1" />
+            <label for="remember" class="text-gray-700 text-sm">Remember me</label>
+          </div>
+          <a (click)="forgotPassword()" class="text-primary text-sm hover:underline cursor-pointer">
+            Forgot Password?
+          </a>
+        </div>
+        <button type="submit" class="btn btn-secondary w-full">
+          Login
+        </button>
+      </form>
+      <div class="flex items-center my-4">
+        <hr class="flex-grow border-t" />
+        <span class="mx-2 text-gray-500">or</span>
+        <hr class="flex-grow border-t" />
+      </div>
+      <button (click)="loginWithGoogle()" class="btn btn-outline w-full">
+        <img src="https://cdn3.emoji.gg/emojis/Google_Logo.png" alt="Google Logo" class="w-6 h-6 mr-2" />
+        <span>Login with Google</span>
+      </button>
+      <p class="mt-4 text-center text-gray-600 text-sm">
+        Don't have an account?
+        <a (click)="navigateToSignup()" class="text-secondary hover:underline cursor-pointer">Sign Up</a>
+      </p>
+    </div>
+  </div>

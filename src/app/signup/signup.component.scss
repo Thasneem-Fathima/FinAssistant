@@ -1,0 +1,5 @@
+/* Full-screen background image */
+::ng-deep body {
+    background: url('./../../assets/fin_bg.jpg') no-repeat center center;
+    background-size: cover;
+}

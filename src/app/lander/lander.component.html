@@ -1,0 +1,182 @@
+<!-- Header & Navigation -->
+<header class="w-full p-6 flex justify-between items-center max-w-6xl mx-auto">
+    <h1 class="text-3xl font-bold text-gray-800">FinMate</h1>
+    <nav>
+        <ul class="flex space-x-6">
+            <li>
+                <a (click)="scrollToSection('overview')"
+                    class="hover:underline text-gray-800 cursor-pointer">Overview</a>
+            </li>
+            <li>
+                <a (click)="scrollToSection('features')"
+                    class="hover:underline text-gray-800 cursor-pointer">Features</a>
+            </li>
+            <li>
+                <a (click)="scrollToSection('demo')" class="hover:underline text-gray-800 cursor-pointer">Demo</a>
+            </li>
+            <li>
+                <a (click)="scrollToSection('pricing')" class="hover:underline text-gray-800 cursor-pointer">Pricing</a>
+            </li>
+            <li>
+                <a (click)="scrollToSection('testimonials')"
+                    class="hover:underline text-gray-800 cursor-pointer">Testimonials</a>
+            </li>
+            <li>
+                <a (click)="scrollToSection('contact')" class="hover:underline text-gray-800 cursor-pointer">Contact</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Hero / Overview Section -->
+<section id="overview" class="bg-gradient-to-r from-green-600 to-green-700 text-white text-center py-20">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-5xl font-extrabold mb-6">Your Smart Finance Assistant</h2>
+        <p class="text-xl mb-8">
+            Manage your expenses, track your investments, and plan your future with AI-powered insights.
+        </p>
+        <a (click)="goTo('/login')"
+            class="bg-white text-green-600 py-3 px-8 rounded-full font-bold shadow hover:bg-gray-100 transition cursor-pointer">
+            Get Started
+        </a>
+    </div>
+</section>
+
+<!-- Section Divider -->
+<div class="divider h-20 w-full"></div>
+
+<!-- Features & Benefits Section -->
+<section id="features" class="py-20 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+        <h3 class="text-3xl font-bold mb-12">Why Choose FinMate?</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 shadow rounded-lg">
+                <h4 class="text-2xl font-bold mb-4">Expense Tracking</h4>
+                <p class="text-gray-600">
+                    Automatically categorize and track your spending to keep your finances in check.
+                </p>
+            </div>
+            <div class="bg-white p-8 shadow rounded-lg">
+                <h4 class="text-2xl font-bold mb-4">Investment Insights</h4>
+                <p class="text-gray-600">
+                    Analyze and optimize your portfolio with real-time market insights.
+                </p>
+            </div>
+            <div class="bg-white p-8 shadow rounded-lg">
+                <h4 class="text-2xl font-bold mb-4">Smart Budgeting</h4>
+                <p class="text-gray-600">
+                    Set budgets and receive actionable alerts to stay on track with your goals.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Product Demo Section -->
+<section id="demo" class="py-20">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h3 class="text-3xl font-bold mb-8">See FinMate in Action</h3>
+        <p class="text-gray-700 mb-6">
+            Watch our quick demo to see how FinMate can transform your financial management.
+        </p>
+        <div class="relative" style="padding-top: 56.25%;">
+            <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                title="FinMate Demo" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section id="pricing" class="py-20 bg-gray-100">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+        <h3 class="text-3xl font-bold mb-8">Pricing Plans</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="border p-8 rounded-lg">
+                <h4 class="text-2xl font-semibold mb-4">Basic</h4>
+                <p class="text-3xl font-bold mb-4">
+                    $0<span class="text-xl font-normal">/mo</span>
+                </p>
+                <ul class="mb-6 space-y-2 text-gray-600">
+                    <li>Expense tracking</li>
+                    <li>Basic analytics</li>
+                </ul>
+                <button class="bg-green-500 text-white py-2 px-6 rounded-full hover:bg-green-600 transition">
+                    Choose Plan
+                </button>
+            </div>
+            <div class="border p-8 rounded-lg bg-green-50">
+                <h4 class="text-2xl font-semibold mb-4">Pro</h4>
+                <p class="text-3xl font-bold mb-4">
+                    $9.99<span class="text-xl font-normal">/mo</span>
+                </p>
+                <ul class="mb-6 space-y-2 text-gray-600">
+                    <li>All Basic features</li>
+                    <li>Advanced analytics</li>
+                    <li>Personalized advice</li>
+                </ul>
+                <button class="bg-green-500 text-white py-2 px-6 rounded-full hover:bg-green-600 transition">
+                    Choose Plan
+                </button>
+            </div>
+            <div class="border p-8 rounded-lg">
+                <h4 class="text-2xl font-semibold mb-4">Enterprise</h4>
+                <p class="text-3xl font-bold mb-4">Contact Us</p>
+                <ul class="mb-6 space-y-2 text-gray-600">
+                    <li>Custom solutions</li>
+                    <li>Dedicated support</li>
+                    <li>Integration services</li>
+                </ul>
+                <button class="bg-green-500 text-white py-2 px-6 rounded-full hover:bg-green-600 transition">
+                    Contact Sales
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="py-20">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h3 class="text-3xl font-bold mb-8">What Our Users Say</h3>
+        <div class="space-y-8">
+            <blockquote class="bg-gray-100 p-6 rounded-lg shadow">
+                <p class="text-gray-700 italic">
+                    "FinMate has completely transformed the way I manage my finances. The insights are invaluable!"
+                </p>
+                <footer class="mt-4 text-green-600 font-bold">– Alex J.</footer>
+            </blockquote>
+            <blockquote class="bg-gray-100 p-6 rounded-lg shadow">
+                <p class="text-gray-700 italic">
+                    "A game changer for budgeting and investment tracking. Highly recommended!"
+                </p>
+                <footer class="mt-4 text-green-600 font-bold">– Jamie L.</footer>
+            </blockquote>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-20 bg-gray-100">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h3 class="text-3xl font-bold mb-8">Get in Touch</h3>
+        <p class="text-gray-700 mb-6">
+            Have questions or need support? We're here to help you manage your finances better.
+        </p>
+        <a href="mailto:support@finmate.com"
+            class="bg-green-500 text-white py-3 px-8 rounded-full font-bold shadow hover:bg-green-600 transition">
+            Contact Us
+        </a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-8 bg-gray-800 text-gray-400 text-center">
+    <div class="max-w-6xl mx-auto px-6">
+        <p>© 2025 FinMate. All Rights Reserved.</p>
+        <div class="mt-4 space-x-4">
+            <a href="#privacy" class="hover:underline">Privacy Policy</a>
+            <a href="#terms" class="hover:underline">Terms of Service</a>
+            <a href="#faq" class="hover:underline">FAQ</a>
+        </div>
+    </div>
+</footer>
